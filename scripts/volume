@@ -1,0 +1,45 @@
+#!/bin/sh
+fetch() {
+  volume=$(pamixer --get-volume)
+}
+icon() {
+  if [[ "$volume" -eq "0" ]]; then
+    echo  ""
+  elif [[("$volume" -le "33") ]]; then
+    echo ""
+  elif [[("$volume" -le "66") ]]; then
+    echo ""
+  elif [[("$volume" -le "100") ]]; then
+    echo ""
+  fi
+}
+notify() {
+  fetch
+  notify-send \
+    -h string:x-canonical-private-synchronous:sys-notify \
+    -h int:value:"$volume" \
+    -u low \
+    -c "system-meter"\
+    "$(icon)  $volume%"
+}
+inc() {
+  if [ "$(pamixer --get-mute)" == "true" ]; then
+    mute
+  else
+    pamixer -i 5 && notify
+  fi
+}
+dec() {
+  pamixer -d 5 && notify
+}
+mute() {
+case "$(pamixer --get-mute)" in
+    "false") pamixer -m && notify-send -c "system-meter" -h string:x-canonical-private-synchronous:sys-notify -u low "  Volume Switched OFF";;
+    "true") fetch && pamixer -u && notify-send -c "system-meter" -h int:value:"$volume" -h string:x-canonical-private-synchronous:sys-notify -u low "$(icon)  Volume Switched ON";;
+esac
+}
+case "$1" in
+  "-i") inc;;
+  "-d") dec;;
+  "-t") mute;;
+esac

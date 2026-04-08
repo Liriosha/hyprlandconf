@@ -1,0 +1,13 @@
+#!/bin/sh
+mute() {
+  if [ "$(pamixer --default-source --get-mute)" == "false" ]; then
+    pamixer --default-source -m && notify-send -h string:x-canonical-private-synchronous:sys-notify -u low -c "system-meter" "  Microphone Switched OFF"
+  elif [ "$(pamixer --default-source --get-mute)" == "true" ]; then
+    pamixer -u --default-source u && notify-send -h string:x-canonical-private-synchronous:sys-notify -u low -c "system-meter" "  Microphone Switched ON"
+  fi
+}
+case "$1" in
+# "-i") inc;;
+# "-d") dec;;
+"-t") mute ;;
+esac

@@ -1,0 +1,41 @@
+#!/bin/sh
+fetch() {
+  brightness=$(brightnessctl -m | cut -d, -f4 | tr -d '%')
+}
+icon() {
+  if [ "$brightness" -le 30 ]; then
+    echo "󰃞"
+  elif [ "$brightness" -le 50 ]; then
+    echo "󰃝"
+  elif [ "$brightness" -le 90 ]; then
+    echo "󰃟"
+  else
+    echo "󰃠"
+  fi
+}
+notify() {
+  fetch
+  notify-send \
+    -h string:x-canonical-private-synchronous:sys-notify \
+    -h int:value:"$brightness" \
+    -u low \
+    -c "system-meter" \
+    "$(icon) $brightness%"
+}
+change_backlight() {
+  brightnessctl set "$1" && notify
+}
+case "$1" in
+"-g")
+  get_backlight
+  ;;
+"-i")
+  change_backlight "+5%"
+  ;;
+"-d")
+  change_backlight "5%-"
+  ;;
+*)
+  get_backlight
+  ;;
+esac
