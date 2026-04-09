@@ -9,7 +9,7 @@ Restart hyprland using META+M and log in again
 # Dependencies
 
 ```
-ttf-jetbrains-mono-nerd fuzzel hyprlock hypridle hyprpaper mako waybar hyprpolkitagent xdg-desktop-portal-hyprland pamixer
+ttf-jetbrains-mono-nerd fuzzel hyprlock hypridle awww mako waybar hyprpolkitagent xdg-desktop-portal-hyprland pamixer waypaper
 ```
 Please install through your package manager
 For network gui you need `NetworkManager`
