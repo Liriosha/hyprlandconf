@@ -10,6 +10,6 @@ Restart hyprland using META+M and log in again
 
 ```
 ttf-jetbrains-mono-nerd fuzzel hyprlock hypridle hyprpaper mako waybar hyprpolkitagent xdg-desktop-portal-hyprland pamixer
-
 ```
 Please install through your package manager
+For network gui you need `NetworkManager`
