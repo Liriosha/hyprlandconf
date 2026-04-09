@@ -1,16 +1,16 @@
 sort=-time
 layer=overlay
-background-color=#333333FF
+background-color={{colors.background.default.hex_alpha}}
 width=300
 height=110
 border-size=2
-border-color=#9c2fe0
+border-color={{colors.outline.default.hex_alpha}}
 border-radius=0
 icons=1
 max-icon-size=64
 default-timeout=5000
 ignore-timeout=0
-progress-color=#9c2fe0
+progress-color={{colors.secondary.default.hex_alpha}}
 font=JetBrainsMono Nerd Font 10
 
 [urgency=low]
@@ -19,8 +19,8 @@ border-color=#cccccc
 [urgency=normal]
 border-color=#d08770
 
-[urgency=high]
-border-color=#bf616a
+[urgency=critical]
+border-color={{colors.error.default.hex_alpha}}
 default-timeout=0
 
 [category=mpd]
@@ -32,5 +32,4 @@ group-by=category
 # Displayed in the top-center below the waybar
 [category=system-meter]
 anchor=top-center
-border-color=#9c2fe0
 default-timeout=800

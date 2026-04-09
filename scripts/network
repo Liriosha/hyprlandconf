@@ -19,7 +19,7 @@ connect() {
         END{
             for(i in ssid) print ssid[i]
         }' |
-      fuzzel -a top-right -d --placeholder "WiFi Name"
+      fuzzel -a top-right -d --placeholder "WiFi Name" --config=.config/hypr/fuzzel/fuzzel.ini
   )
 }
 connect
@@ -32,7 +32,7 @@ if [ -n "$CHOICE" ]; then
     STATUS=$(nmcli connection up "$SSID" 2>&1)
   else
     [[ "$SECURITY" != "" ]]
-    PASSWORD=$(fuzzel -a top-right --password --dmenu --prompt-only="Password for $SSID : ")
+    PASSWORD=$(fuzzel -a top-right --password --dmenu --prompt-only="Password for $SSID : " --config=.config/hypr/fuzzel/fuzzel.ini)
     STATUS=$(nmcli device wifi connect "$SSID" password "$PASSWORD" 2>&1)
   fi
 

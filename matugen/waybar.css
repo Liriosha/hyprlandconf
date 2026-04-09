@@ -1,6 +1,7 @@
 * {
   font-family: JetBrainsMono Nerd Font;
   font-size: 13px;
+  color: {{colors.inverse_surface.default.hex}}
 }
 
 .modules-left {
@@ -12,21 +13,21 @@
 }
 
 window#waybar {
-  background: rgba(20, 20, 20, 0.85);
-  color: white;
+  background-color: rgba({{colors.scrim.default.red}}, {{colors.scrim.default.green}}, {{colors.scrim.default.blue}}, 0.7);
+  color: {{colors.on_background.default.hex}};
   border-radius: 0px 0px 10px 10px;
-  background-color: rgba(0, 0, 0, 0.2);
 }
 
 #workspaces button {
   padding: 0 6px;
   margin: 3px;
   border-radius: 6px;
+  color: {{colors.inverse_surface.default.hex}};
 }
 
 #workspaces button.active {
-  background: #9c2fe0;
-  color: black;
+  background: {{colors.primary.default.hex}};
+  color: {{colors.on_primary.default.hex}};
 }
 
 #clock {
@@ -45,14 +46,17 @@ window#waybar {
 #battery.critical {
   color: #ff5555;
 }
+
 @keyframes blink {
   50% {
     opacity: 0;
   }
 }
+
 #battery.verycritical {
   color: #F53C3C;
 }
+
 #battery.verycritical:not(.charging) {
   color: #F53C3C;
   animation-name: blink;
@@ -72,6 +76,7 @@ window#waybar {
 #tray {
   padding-right: 10px;
 }
+
 #pulseaudio {
   color: #f9e2af;
   padding-right: 10px;
