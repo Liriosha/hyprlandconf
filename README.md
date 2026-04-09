@@ -9,7 +9,7 @@ Restart hyprland using META+M and log in again
 # Dependencies
 
 ```
-ttf-jetbrains-mono-nerd fuzzel hyprlock hypridle hyprpaper mako waybar hyprpolkitagent xdg-desktop-portal-hyprland 
+ttf-jetbrains-mono-nerd fuzzel hyprlock hypridle hyprpaper mako waybar hyprpolkitagent xdg-desktop-portal-hyprland pamixer
 
 ```
 Please install through your package manager
