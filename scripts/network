@@ -24,17 +24,18 @@ connect() {
 }
 connect
 if [ -n "$CHOICE" ]; then
-  SSID=$(echo "$CHOICE" | awk -F '\ ' '{print $2}' | sed 's/[\t]//g')
-  echo $SSID
+  SSID=$(echo "$CHOICE" | awk -F ' ' '{print $2}' | sed 's/[\t]//g')
   SECURITY=$(echo "$CHOICE" | awk -F ' ' '{print $3}')
-  echo $SECURITY
+  CONN=$(nmcli -t -f NAME connection show | grep -Fx "$SSID")
   PASSWORD=""
-  if [[ "$SECURITY" != "" ]]; then
-    echo "Network requires a password, prompting"
+  if [[ "$CONN" != "" ]]; then
+    STATUS=$(nmcli connection up "$SSID" 2>&1)
+  else
+    [[ "$SECURITY" != "" ]]
     PASSWORD=$(fuzzel -a top-right --password --dmenu --prompt-only="Password for $SSID : ")
-    echo "Connecting"
+    STATUS=$(nmcli device wifi connect "$SSID" password "$PASSWORD" 2>&1)
   fi
-  STATUS=$(nmcli device wifi connect "$SSID" password "$PASSWORD" 2>&1)
+
   if [ $? -eq 0 ]; then
     notify-send "󱚽 Network" "Connected to $SSID" -i network-wireless
   else
