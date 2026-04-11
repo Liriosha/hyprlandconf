@@ -43,10 +43,8 @@
   },
   "hyprland/window": {
     "format": "{}",
-    "rewrite": {
-      "(.*) — librewolf": " $1",
-      "(.*) - zsh": " [$1]"
-    },
+    "icon": true,
+    "icon-size": 16,
     "separate-outputs": true
   },
   "clock": {
