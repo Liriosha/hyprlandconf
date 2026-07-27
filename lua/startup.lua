@@ -1,0 +1,15 @@
+hl.on("hyprland.start", function()
+	hl.exec_cmd("awww-daemon & xdg-desktop-portal-hyprland & hypridle & mako -c ~/.config/hypr/mako/config")
+	hl.exec_cmd("chmod +x ~/.config/hypr/scripts/*")
+	hl.exec_cmd("systemctl --user start hyprpolkitagent")
+	hl.exec_cmd(
+		"matugen image $(awww query | awk -F 'image: ' '{print $2}') --prefer saturation -c ~/.config/hypr/matugen/matugen.conf"
+	)
+	hl.exec_cmd("pkill waybar; waybar -c ~/.config/hypr/waybar/main.json -s ~/.config/hypr/waybar/theme.css")
+end)
+hl.on("config.reloaded", function()
+	hl.exec_cmd("pkill mako; mako -c ~/.config/hypr/mako/config")
+end)
+hl.on("hyprland.shutdown", function()
+	hl.exec_cmd("pkill awww-daemon & pkill xdg-desktop-portal-hyprland & pkill hypridle & pkill mako & pkill waybar")
+end)
