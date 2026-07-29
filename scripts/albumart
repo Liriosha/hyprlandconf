@@ -1,0 +1,2 @@
+#!/bin/bash
+playerctl metadata mpris:artUrl 2>/dev/null | sed 's|^file://||'

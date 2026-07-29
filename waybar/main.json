@@ -2,19 +2,22 @@
   "layer": "top",
   "position": "top",
   "height": 32,
+  "mod": "dock",
   "modules-left": [
-    "hyprland/window"
+    "hyprland/window",
   ],
   "modules-center": [
     "hyprland/workspaces"
   ],
   "modules-right": [
+    "group/music",
     "tray",
     "clock",
     "pulseaudio",
     "network",
-    "battery"
+    "battery",
   ],
+
   "hyprland/workspaces": {
     "format": "{icon}",
     "on-click": "activate",
@@ -78,8 +81,53 @@
     "tooltip-format-ethernet": "󰀂  {ifname}\n⇣{bandwidthDownBytes}  ⇡{bandwidthUpBytes}",
     "tooltip-format-disconnected": "Disconnected",
     "interval": 5,
-    "on-click": "~/.config/hypr/scripts/network"
+    "on-click": "nmtui"
   },
+
+  "cava": {
+        "framerate": 30,
+        "autosens": 1,
+        "sensitivity": 0.0001,
+        "bars": 26,
+        "lower_cutoff_freq": 50,
+        "higher_cutoff_freq": 10000,
+        "method": "pulse",
+        "source": "auto",
+        "stereo": true,
+        "reverse": false,
+        "bar_delimiter": 0,
+        "monstercat": false,
+        "waves": false,
+        "noise_reduction": 0.001,
+        "input_delay": 2,
+        "format-icons" : ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█" ],
+        "actions": {
+                   "on-click-right": "mode"
+        }
+    },
+
+  "custom/mpris": {
+      "exec": "~/.config/hypr/scripts/player",
+      "format": {},
+      "escape": true,
+      "on-click": "playerctl play-pause"
+  },
+
+  "image#albumart": {
+      "exec": "~/.config/hypr/scripts/albumart",
+      "size": 32,
+      "interval": 1
+  },
+
+  "group/music": {
+    "orientation": "horizontal",
+    "modules": [
+        "image#albumart",
+        "custom/mpris",
+        "cava"
+    ],
+  },
+
   "tray": {
     "spacing": 10
   },

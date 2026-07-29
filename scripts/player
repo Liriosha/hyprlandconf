@@ -1,0 +1,30 @@
+#!/bin/bash
+
+max=35
+off=0
+last=
+
+while :; do
+  artist=$(playerctl metadata xesam:artist 2>/dev/null)
+  title=$(playerctl metadata xesam:title 2>/dev/null)
+  track="$artist${artist:+${title:+ - }}$title"
+
+  case "$(playerctl status 2>/dev/null)" in
+  Playing) icon= ;;
+  Paused) icon=󰏤 ;;
+  *) icon= ;;
+  esac
+
+  [[ $track != "$last" ]] && off=0 last=$track
+
+  if ((${#track} > max)); then
+    scroll="$track  $track"
+    text=${scroll:off:max}
+    ((++off >= ${#track} + 3)) && off=0
+  else
+    text=$track
+  fi
+
+  echo "$icon $text"
+  sleep .1
+done
